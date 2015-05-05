@@ -3,21 +3,56 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+	
     <parent>
-        <groupId>ro.teamnet</groupId>
-        <artifactId>app-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../app-parent</relativePath>
+        <groupId>ro.teamnet.bootstrap</groupId>
+        <artifactId>bootstrap-dependencies</artifactId>
+        <version>0.2-SNAPSHOT</version>
+        <relativePath />
     </parent>
+	
+	<groupId>ro.teamnet.ldap</groupId>
     <artifactId>app-ldap-java</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
+	
     <dependencies>
-        <dependency>
-            <groupId>ro.teamnet</groupId>
-            <artifactId>app-java</artifactId>
-            <type>jar</type>
-            <version>0.0.1-SNAPSHOT</version>
+		<!-- Project dependencies -->
+		<dependency>
+            <groupId>ro.teamnet.bootstrap</groupId>
+            <artifactId>app-bootstrap-commons</artifactId>
+            <version>0.2-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
+	
+	<build>
+        <plugins>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadoc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
