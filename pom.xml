@@ -7,7 +7,7 @@
     <parent>
         <groupId>ro.teamnet.bootstrap</groupId>
         <artifactId>bootstrap-dependencies</artifactId>
-        <version>0.2-SNAPSHOT</version>
+        <version>0.2.5-SNAPSHOT</version>
         <relativePath />
     </parent>
 	
@@ -18,11 +18,22 @@
 	
     <dependencies>
 		<!-- Project dependencies -->
-		<dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+            <version>4.0.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
             <groupId>ro.teamnet.bootstrap</groupId>
             <artifactId>app-bootstrap-commons</artifactId>
-            <version>0.2-SNAPSHOT</version>
-            <scope>provided</scope>
+            <version>0.2.5-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ro.teamnet.bootstrap</groupId>
+            <artifactId>app-bootstrap-security</artifactId>
+            <version>0.2.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
 	
