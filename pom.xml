@@ -8,13 +8,13 @@
     <parent>
         <groupId>ro.teamnet.bootstrap</groupId>
         <artifactId>bootstrap-dependencies</artifactId>
-        <version>0.2.10</version>
+        <version>0.2.11-SNAPSHOT</version>
         <relativePath />
     </parent>
 	
 	<groupId>ro.teamnet.ldap</groupId>
     <artifactId>app-ldap-java</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 	
     <dependencies>
@@ -28,13 +28,13 @@
         <dependency>
             <groupId>ro.teamnet.bootstrap</groupId>
             <artifactId>app-bootstrap-commons</artifactId>
-            <version>0.2.10</version>
+            <version>0.2.11-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>ro.teamnet.bootstrap</groupId>
             <artifactId>app-bootstrap-security</artifactId>
-            <version>0.2.10</version>
+            <version>0.2.11-SNAPSHOT</version>
         </dependency>
     </dependencies>
 	
@@ -54,7 +54,7 @@
     <scm>
         <url>http://git-components.teamnet.ro/summary/components%2Fjava%2Fplatform-extensions%2Fapp-ldap-java.git</url>
         <connection>scm:git:http://component-publisher@git-components.teamnet.ro/r/components/java/platform-extensions/app-ldap-java.git</connection>
-        <tag>v0.0.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
