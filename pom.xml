@@ -3,11 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-	
+    <properties>
+        <bootstrap.version>0.2.11-SNAPSHOT</bootstrap.version>
+    </properties>
+
     <parent>
         <groupId>ro.teamnet.bootstrap</groupId>
         <artifactId>bootstrap-dependencies</artifactId>
-        <version>0.2.5-SNAPSHOT</version>
+        <version>0.2.11-SNAPSHOT</version>
         <relativePath />
     </parent>
 	
@@ -27,17 +30,47 @@
         <dependency>
             <groupId>ro.teamnet.bootstrap</groupId>
             <artifactId>app-bootstrap-commons</artifactId>
-            <version>0.2.5-SNAPSHOT</version>
+            <version>${bootstrap.version}</version>
         </dependency>
 
         <dependency>
             <groupId>ro.teamnet.bootstrap</groupId>
             <artifactId>app-bootstrap-security</artifactId>
-            <version>0.2.5-SNAPSHOT</version>
+            <version>${bootstrap.version}</version>
         </dependency>
     </dependencies>
 	
-	<build>
+	<distributionManagement>
+        <repository>
+            <id>tni-hq-artifact</id>
+            <name>tni-hq-artifact-releases</name>
+            <url>http://repo.teamnet.ro/tn-components</url>
+        </repository>
+        <snapshotRepository>
+            <id>tni-hq-artifact</id>
+            <name>tni-hq-artifact-snapshots</name>
+            <url>http://repo.teamnet.ro/tn-components</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <url>http://git-components.teamnet.ro/summary/components%2Fjava%2Fplatform-extensions%2Fapp-ldap-java.git</url>
+        <connection>scm:git:http://component-publisher@git-components.teamnet.ro/r/components/java/platform-extensions/app-ldap-java.git</connection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.2</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+        </plugins>
         <plugins>
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
