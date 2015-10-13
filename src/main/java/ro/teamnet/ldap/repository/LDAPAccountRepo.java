@@ -14,13 +14,13 @@ import ro.teamnet.ldap.util.PropertyUtil;
 
 import javax.inject.Inject;
 import javax.naming.NamingException;
+import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.ldap.query.LdapQueryBuilder.query;
-
 /**
  * Created by Marian.Spoiala on 9/21/2015.
  */
@@ -40,10 +40,30 @@ public class LDAPAccountRepo {
             LDAPAccount account = new LDAPAccount();
 
             try {
-                account.setUsername((String) attrs.get(propertyUtil.getProperty("ldap.userName")).get());
-                account.setLastName((String) attrs.get((propertyUtil.getProperty("ldap.lastName"))).get());
-                account.setFirstName((String) attrs.get((propertyUtil.getProperty("ldap.firstName"))).get());
-                account.setEmail((String) attrs.get((propertyUtil.getProperty("ldap.mail"))).get());
+                Attribute attribute = attrs.get(propertyUtil.getProperty("ldap.userName"));
+                if (attribute != null) {
+                    account.setUsername((String) attribute.get());
+                }
+
+                attribute = attrs.get(propertyUtil.getProperty("ldap.lastName"));
+                if (attribute != null) {
+                    account.setLastName((String) attribute.get());
+                }
+
+                attribute = attrs.get(propertyUtil.getProperty("ldap.firstName"));
+                if (attribute != null) {
+                    account.setFirstName((String) attribute.get());
+                }
+
+                attribute = attrs.get(propertyUtil.getProperty("ldap.mail"));
+                if (attribute != null) {
+                    account.setEmail((String) attrs.get(propertyUtil.getProperty("ldap.mail")).get());
+                }
+
+                attribute = attrs.get(propertyUtil.getProperty("ldap.group"));
+                if (attribute != null) {
+                    account.setGroup((String) attrs.get(propertyUtil.getProperty("ldap.group")).get());
+                }
             } catch (NullPointerException e) {
                 account.setUsername(null);
             }

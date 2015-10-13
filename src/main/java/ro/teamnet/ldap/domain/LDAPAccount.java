@@ -9,6 +9,7 @@ public class LDAPAccount {
     private String firstName;
     private String lastName;
     private String email;
+    private String group;
 
 /*    private String langKey;
     private String activationKey;*/
@@ -61,5 +62,13 @@ public class LDAPAccount {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 }

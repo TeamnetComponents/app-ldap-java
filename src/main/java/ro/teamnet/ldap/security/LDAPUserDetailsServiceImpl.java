@@ -44,12 +44,8 @@ public class LDAPUserDetailsServiceImpl implements LDAPUserDetailsService {
     AccountService accountService;
 
     private Account storeUserDB(LDAPAccount ldapAccount) {
-        Account account = accountService.createUserInformation(ldapAccount.getUsername().toLowerCase(), ldapAccount.getPassword(), ldapAccount.getFirstName(), ldapAccount.getLastName(),
-                ldapAccount.getEmail(), null, null);
-
-        System.out.println(account);
-        account.setActivated(true);
-        return accountRepository.save(account);
+        return accountService.createUserInformation(ldapAccount.getUsername().toLowerCase(), ldapAccount.getPassword(), ldapAccount.getFirstName(), ldapAccount.getLastName(),
+                ldapAccount.getEmail(), null, null, true);
     }
 
     private Set<GrantedAuthority> loadGrantedAuthorities(LDAPAccount ldapAccount) {
@@ -63,6 +59,9 @@ public class LDAPUserDetailsServiceImpl implements LDAPUserDetailsService {
             if (accountFromDB == null) {
                 throw new UserAuthenticationFailedException("New user cannot be saved in database!");
             }
+        }
+        else {
+            accountService.changePassword(accountFromDB.getLogin(), ldapAccount.getPassword());
         }
 
         if (!accountFromDB.isActivated()) {
