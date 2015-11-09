@@ -132,7 +132,7 @@ public class LDAPSynchronizationService {
 
         for (LDAPAccount ldapAccount : ldapAccounts) {
             if (ldapAccount.getUsername() != null && ldapAccount.getGroup() != null
-                    && (ldapAccount.getGroup().contains("_Admins") || ldapAccount.getGroup().contains("_ReportUsers"))) {
+                    && (ldapAccount.getGroup().contains("_Admins") || ldapAccount.getGroup().contains("_ReportUsers") || ldapAccount.getGroup().contains("_Users"))) {
                 Account existingAccount = accountService.findByLogin(ldapAccount.getUsername().toLowerCase());
 
                 if (existingAccount == null && ldapAccount.getUsername() != null) {
