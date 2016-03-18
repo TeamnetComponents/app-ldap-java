@@ -11,14 +11,21 @@
     <property name="activated" value="1" dbms="oracle"/>
 
     <property name="pk_t_module" value="HIBERNATE_SEQUENCE.NEXTVAL" dbms="oracle"/>
+    <property name="pk_t_module" value="next value for hibernate_sequence" dbms="mssql"/>
     <property name="pk_t_module" value="nextval('t_module_id_module_seq')" dbms="postgresql"/>
-    <property name="pk_t_module" value="null" dbms="!oracle,!postgresql"/>
+    <property name="pk_t_module" value="null" dbms="!oracle,!postgresql,!mssql"/>
+
+    <property name="pk_t_menu" value="HIBERNATE_SEQUENCE.NEXTVAL" dbms="oracle"/>
+    <property name="pk_t_menu" value="next value for hibernate_sequence" dbms="mssql"/>
+    <property name="pk_t_menu" value="nextval('t_module_id_module_seq')" dbms="postgresql"/>
+    <property name="pk_t_menu" value="null" dbms="!oracle,!postgresql,!mssql"/>
 
     <property name="pk_t_module_right" value="HIBERNATE_SEQUENCE.NEXTVAL" dbms="oracle"/>
+    <property name="pk_t_module_right" value="next value for hibernate_sequence" dbms="mssql"/>
     <property name="pk_t_module_right" value="nextval('t_module_right_id_module_right_seq')" dbms="postgresql"/>
-    <property name="pk_t_module_right" value="null" dbms="!oracle,!postgresql"/>
+    <property name="pk_t_module_right" value="null" dbms="!oracle,!postgresql,!mssql"/>
 
-    <changeSet id="20150505122557" author="teamnet">
+    <changeSet id="20150505122557" author="teamnet" dbms="!mssql">
         <insert tableName="T_MODULE">
             <column name="ID_MODULE" valueComputed="${pk_t_module}"/>
             <column name="VERSION" value="1"/>
@@ -50,5 +57,39 @@
                                     AND FK_MODULE = (SELECT ID_MODULE from T_MODULE where CODE = 'ldap'))"/>
         </insert>
     </changeSet>
+
+    <!--<changeSet id="20150505122557#mssql" author="teamnet" dbms="mssql">
+        <insert tableName="T_MODULE">
+            <column name="ID_MODULE" valueComputed="${pk_t_module}"/>
+            <column name="VERSION" value="1"/>
+            <column name="CODE" value="ldap"/>
+            <column name="TYPE" value="1"/>
+            <column name="DESCRIPTION" value="ldap"/>
+        </insert>
+
+        <insert tableName="T_MENU">
+            <column name="id" valueComputed="${pk_t_menu}"/>
+            <column name="parent_id" value='0'/>
+            <column name="name" value="Ldap"/>
+            <column name="route" value="ldap"/>
+            <column name="css_class" value="fa-puzzle-piece"/>
+            <column name="sort_no" valueComputed="(SELECT max(sort_no)+1 from T_MENU where parent_id=0)"/>
+            <column name="active" value="1"/>
+            <column name="module_name" value="ldap"/>
+            <column name="module_id" valueComputed="(SELECT ID_MODULE from T_MODULE where code = 'ldap')"/>
+        </insert>
+        <insert tableName="T_MODULE_RIGHT">
+            <column name="ID_MODULE_RIGHT" valueComputed="${pk_t_module_right}"/>
+            <column name="MODULE_RIGHT" value="1"/>
+            <column name="VERSION" value="1"/>
+            <column name="FK_MODULE" valueComputed="(SELECT ID_MODULE from T_MODULE where CODE = 'ldap')"/>
+        </insert>
+        <insert tableName="T_ROLE_MODULE_RIGHTS">
+            <column name="fk_role" valueComputed="(SELECT ID_ROLE from T_ROLE where CODE = 'ROLE_ADMIN' )"/>
+            <column name="fk_module_right"
+                    valueComputed="(SELECT ID_MODULE_RIGHT from T_MODULE_RIGHT where  MODULE_RIGHT = 1
+                                    AND FK_MODULE = (SELECT ID_MODULE from T_MODULE where CODE = 'ldap'))"/>
+        </insert>
+    </changeSet>-->
     
 </databaseChangeLog>
